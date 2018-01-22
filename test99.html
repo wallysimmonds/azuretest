@@ -1,0 +1,739 @@
+
+
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr" class="no-js" data-ffo-opensans="false" data-ffo-zillaslab="false">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <script>(function(d) { d.className = d.className.replace(/\bno-js/, ''); })(document.documentElement);</script>
+  <title>How do you set up a local testing server? - Learn web development | MDN</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+    <link rel="home" href="/en-US/">
+    <link rel="license" href="#license">
+  
+
+  
+    
+    
+
+    <link href="https://cdn.mdn.mozilla.net/static/build/styles/mdn.5e883c91cc88.css" rel="stylesheet" type="text/css" />
+
+    
+  
+
+    <link href="https://cdn.mdn.mozilla.net/static/build/styles/wiki.f2b150141114.css" rel="stylesheet" type="text/css" />
+
+
+    
+      
+        <link href="https://cdn.mdn.mozilla.net/static/build/styles/zone-learn.f10c1c3c85d5.css" rel="stylesheet" type="text/css" />
+      
+    
+
+  <link href="https://cdn.mdn.mozilla.net/static/build/styles/locale-en-US.7e45c23d7d30.css" rel="stylesheet" type="text/css" />
+
+  
+    <script type="text/javascript" src="https://cdn.mdn.mozilla.net/static/build/js/mozilla-dnthelper.3936bd979b1d.js" charset="utf-8"></script>
+    
+
+<script type="text/javascript">
+    // only load GA if DNT is not enabled
+    if (Mozilla && !Mozilla.dntEnabled()) {
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-36116321-5', 'mozilla.org');
+        ga('set', 'anonymizeIp', true);
+
+        
+
+        // dimension9 == "Section editing"
+        
+            // dimension12 == 'Page Revision'
+            ga('set', 'dimension12', '1331799');
+            // dimension17 == 'English Slug'
+            ga('set', 'dimension17', 'Learn/Common_questions/set_up_a_local_testing_server');
+
+        (function() {
+            // http://cfsimplicity.com/61/removing-analytics-clutter-from-campaign-urls
+            var win = window;
+            var removeUtms = function(){
+                var location = win.location;
+                if (location.href.indexOf('utm') != -1 && win.history.replaceState) {
+                    win.history.replaceState({}, '', location.pathname);
+                }
+            };
+
+            ga('send', 'pageview', {'hitCallback': removeUtms});
+        })();
+    }
+</script>
+
+  
+    <!-- common social tags -->
+    
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://cdn.mdn.mozilla.net/static/img/opengraph-logo.72382e605ce3.png">
+    <meta property="og:site_name" content="Mozilla Developer Network">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://cdn.mdn.mozilla.net/static/img/opengraph-logo.72382e605ce3.png">
+    <meta name="twitter:site" content="@MozDevNet">
+    <meta name="twitter:creator" content="@MozDevNet">
+    <link rel="search" type="application/opensearchdescription+xml" href="https://developer.mozilla.org/en-US/search/xml" title="Mozilla Developer Network">
+  
+
+  <!-- third-generation iPad with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cdn.mdn.mozilla.net/static/img/favicon144.e7e21ca263ca.png">
+  <!-- iPhone with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cdn.mdn.mozilla.net/static/img/favicon114.d526f38b09c5.png">
+  <!-- first- and second-generation iPad: -->
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cdn.mdn.mozilla.net/static/img/favicon72.cc65d1d762a0.png">
+  <!-- non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+  <link rel="apple-touch-icon-precomposed" href="https://cdn.mdn.mozilla.net/static/img/favicon57.de33179910ae.png">
+  <!-- basic favicon -->
+  <link rel="shortcut icon" href="https://cdn.mdn.mozilla.net/static/img/favicon32.7f3da72dcea1.png">
+  <!--[if IE]>
+  <meta http-equiv="imagetoolbar" content="no">
+  <script type="text/javascript" src="https://cdn.mdn.mozilla.net/static/build/js/html5shiv.3948ccddab6f.js" charset="utf-8"></script>
+  <![endif]-->
+
+  <script type="text/javascript" src="https://cdn.mdn.mozilla.net/static/build/js/font-check.713e9d01025c.js" charset="utf-8"></script>
+
+  
+  <link rel="dns-prefetch" href="https://interactive-examples.mdn.mozilla.net" pr="0.75" />
+  <link rel="preconnect" href="https://interactive-examples.mdn.mozilla.net" pr="0.75" />
+
+  <link rel="preload" href="https://interactive-examples.mdn.mozilla.net/js/codemirror-5-31-0.js" as="script" />
+  <link rel="preload" href="https://interactive-examples.mdn.mozilla.net/js/editor-js.js" as="script" />
+
+  <link rel="alternate" type="application/json" href="/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server$json">
+  <link rel="canonical" href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server" >
+
+  
+    
+      <link rel="alternate" hreflang="es" href="/es/docs/Learn/Common_questions/set_up_a_local_testing_server" title="¿Cómo se configura un servidor de prueba local?">
+    
+      <link rel="alternate" hreflang="fr" href="/fr/docs/Apprendre/Common_questions/configurer_un_serveur_de_test_local" title="Comment configurer un serveur de test local ?">
+    
+      <link rel="alternate" hreflang="pt-PT" href="/pt-PT/docs/Learn/Questoes_comuns/Congiurar_um_servidor_de_testes_local" title="Como configurar um servidor  local de testes?">
+    
+      <link rel="alternate" hreflang="ro" href="/ro/docs/Learn/Common_questions/set_up_a_local_testing_server" title="Cum configurezi un server local de testare?">
+    
+      <link rel="alternate" hreflang="zh-CN" href="/zh-CN/docs/Learn/Common_questions/set_up_a_local_testing_server" title="How do you set up a local testing server?">
+    
+  
+
+  <!-- document-specific social tags -->
+  <meta property="og:title" content="How do you set up a local testing server?">
+  <meta property="og:url" content="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server">
+  <meta name="twitter:url" content="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server">
+  <meta name="twitter:title" content="How do you set up a local testing server?">
+  
+  <meta property="og:description" content="Throughout most of the learning area, we tell you to just open your examples directly in a browser — this can be done by double clicking the HTML file, dragging and dropping it into the browser window, or choosing File  Open... and navigating to the HTML file. There are many ways to achieve this.">
+  <meta name="description" content="Throughout most of the learning area, we tell you to just open your examples directly in a browser — this can be done by double clicking the HTML file, dragging and dropping it into the browser window, or choosing File  Open... and navigating to the HTML file. There are many ways to achieve this.">
+  <meta name="twitter:description" content="Throughout most of the learning area, we tell you to just open your examples directly in a browser — this can be done by double clicking the HTML file, dragging and dropping it into the browser window, or choosing File  Open... and navigating to the HTML file. There are many ways to achieve this.">
+  
+
+</head>
+<body data-slug="Learn/Common_questions/set_up_a_local_testing_server" contextmenu="edit-history-menu" data-search-url="" class="document zone ">
+
+  <script type="text/javascript">
+    // make sure global mdn object exists
+    var mdn = window.mdn || {};
+
+    (function(win) {
+        'use strict';
+
+        (function(){
+  var FLAGS = {
+    'compat_data': false,'kumaediting': false,'line_length': true,'page_move': false,'registration_disabled': false,'search_suggestions': false,'section_edit': false,'sg_task_completion': false,'spam_admin_override': false,'spam_checks_enabled': true,'spam_spammer_override': false,'spam_submissions_enabled': false,'spam_testing_mode': false,'wiki_samples': true,'wiki_spam_exempted': false,'wiki_spam_training': false
+    },
+    SWITCHES = {
+    'wiki_error_on_delete': false,'wiki_force_immediate_rendering': false,'enable_optimizely': false,'welcome_email': true,'application_ACAO': true,'store_revision_ips': true,'dumb_doc_urls': true,'newsletter': true,'newsletter_article': true,'foundation_callout': false,'helpful-survey-2': true,'wiki_spam_training': true
+    },
+    SAMPLES = {
+    
+    };
+  window.waffle = {
+    "flag_is_active": function waffle_flag(flag_name) {
+      
+      return !!FLAGS[flag_name];
+    },
+    "switch_is_active": function waffle_switch(switch_name) {
+      
+      return !!SWITCHES[switch_name];
+    },
+    "sample_is_active": function waffle_sample(sample_name) {
+      
+      return !!SAMPLES[sample_name];
+    },
+    "FLAGS": FLAGS,
+    "SWITCHES": SWITCHES,
+    "SAMPLES": SAMPLES
+  };
+})();
+
+
+        // This needs to be set before ckeditor.js loads
+        window.CKEDITOR_BASEPATH = '/static/js/libs/ckeditor/build/ckeditor/';
+
+        // Site configuration
+        win.mdn.ckeditor = {};
+        win.mdn.features = {};
+        win.mdn.staticPath = 'https://cdn.mdn.mozilla.net/static/';
+        win.mdn.wiki = {
+            autosuggestTitleUrl: '/en-US/docs/get-documents'
+        };
+        win.mdn.assets = {
+            css: {
+                'editor-content': ['https://cdn.mdn.mozilla.net/static/build/styles/editor-content.4d325bcf0720.css','https://cdn.mdn.mozilla.net/static/build/styles/editor-locale-en-US.7e45c23d7d30.css',
+                ],
+
+                'wiki-compat-tables': ['https://cdn.mdn.mozilla.net/static/build/styles/wiki-compat-tables.427d3667f370.css',]
+            },
+            js: {
+                'syntax-prism': ['https://cdn.mdn.mozilla.net/static/build/js/syntax-prism.05dc5663d445.js',],
+                'wiki-compat-tables': ['https://cdn.mdn.mozilla.net/static/build/js/wiki-compat-tables.003f4acf76ea.js',]
+            }
+        };
+
+        win.mdn.notifications = [];
+
+        
+
+        // interactive editor config
+        win.mdn.interactiveEditor = {
+            siteUrl: "https://developer.mozilla.org",
+            editorUrl: "https://interactive-examples.mdn.mozilla.net"
+        };
+
+    })(this);
+</script>
+    
+  <ul id="nav-access">
+    <li><a href="#document-main" id="skip-main">Skip to main content</a></li>
+    <li><a id="skip-language" href="#language">Select language</a></li>
+    <li><a href="#q" id="skip-search">Skip to search</a></li>
+  </ul>
+
+  <!-- Header -->
+  <header id="main-header"><div class="center">
+    <a href="/en-US/" class="logo">MDN Web Docs</a>
+
+    <div id="nav-sec">
+      <ul>
+      <li class="nav-login"><div class="login">
+    
+        
+        <a href="/users/github/login/?next=%2Fen-US%2Fdocs%2FLearn%2FCommon_questions%2Fset_up_a_local_testing_server" class="login-link js-login-link" data-service="GitHub">
+            Sign in
+            <i class="icon-github" aria-hidden="true"></i>
+        </a>
+    
+</div></li>
+      </ul>
+    </div>
+
+    <nav id="main-nav" class="nav-main" role="navigation"><ul><li class="nav-main-item"><a href="/en-US/docs/Web">Technologies<i aria-hidden="true" class="icon-caret-down"></i></a>
+      <div class="submenu js-submenu" id="nav-tech-submenu">
+        <div class="submenu-column">
+          <ul>
+            <li><a href="/en-US/docs/Web/HTML">HTML</a></li>
+            <li><a href="/en-US/docs/Web/CSS">CSS</a></li>
+            <li><a href="/en-US/docs/Web/JavaScript">JavaScript</a></li>
+            <li><a href="/en-US/docs/Web/Guide/Graphics">Graphics</a></li>
+            <li><a href="/en-US/docs/Web/HTTP">HTTP</a></li>
+            <li><a href="/en-US/docs/Web/API">APIs / DOM</a></li>
+            <li><a href="/en-US/docs/Mozilla/Add-ons/WebExtensions">Browser Extensions</a></li>
+            <li><a href="/en-US/docs/Web/MathML">MathML</a></li>
+          </ul>
+        </div></div><li class="nav-main-item"><a href="/en-US/docs/Learn">References & Guides<i aria-hidden="true" class="icon-caret-down"></i></a>
+        <div class="submenu js-submenu" id="nav-learn-submenu">
+        <div class="submenu-column">
+          <ul>
+            <li><a href="/en-US/docs/Learn">Learn web development</a></li>
+            <li><a href="/en-US/docs/Web/Tutorials">Tutorials</a></li>
+            <li><a href="/en-US/docs/Web/Reference">References</a></li>
+            <li><a href="/en-US/docs/Web/Guide">Developer Guides</a></li>
+            <li><a href="/en-US/docs/Web/Accessibility">Accessibility</a></li>
+            <li><a href="/en-US/docs/Games">Game development</a></li>
+            <li><a href="/en-US/docs/Web">...more docs</a></li>
+          </ul>
+        </div>
+      </div>
+      </li><li class="nav-main-item"><a href="/en-US/docs/MDN/Feedback">Feedback<i aria-hidden="true" class="icon-caret-down"></i></a>
+        <div class="submenu js-submenu" id="nav-contact-submenu">
+          <div class="submenu-column">
+            <ul>
+              <li><a href="https://support.mozilla.org/">Get Firefox help<i aria-hidden="true" class="icon-external-link"></i></a></li>
+              <li><a href="https://stackoverflow.com/">Get web development help<i aria-hidden="true" class="icon-external-link"></i></a></li>
+            </ul>
+            <ul>
+              <li><a href="/en-US/docs/MDN/Community">Join the MDN community</a></li>
+              <li><a target="_blank" href="https://bugzilla.mozilla.org/form.doc?bug_file_loc=https%3A//developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server">Report a content problem<i aria-hidden="true" class="icon-external-link"></i></a></li>
+              <li><a target="_blank" href="https://bugzilla.mozilla.org/form.mdn">Report a bug<i aria-hidden="true" class="icon-external-link"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li class="nav-main-search"><form action="/en-US/search" method="get" role="search">
+        <div class="search-wrap">
+          <label for="main-q" class="offscreen">Search</label>
+          <input type="search" id="main-q" name="q" placeholder="Search" data-value="" value="" />
+          <span class="search-trigger"><i aria-hidden="true" class="icon-search"></i></span>
+          <button type="submit" class="offscreen">Search</button>
+        </div>
+      </form></li>
+    </ul></nav>
+  </div></header> 
+
+  <!-- Content will go here -->
+  <main id="content">
+      
+  <!-- heading -->
+  <div id="wiki-document-head" class="document-head">
+    <div class="center">
+      <!-- action buttons -->
+      <div class="document-actions">
+        
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  <ul class="page-buttons">
+      <li><button id="languages-menu" class="transparent" aria-haspopup="true" aria-owns="languages-menu-submenu" aria-expanded="false"><span>Languages</span><i aria-hidden="true" class="icon-language"></i></button>
+
+        <div class="submenu js-submenu" id="languages-menu-submenu">
+          <div class="submenu-column">
+            <ul id="translations">
+              
+                
+                
+                
+                  <li><bdi><a rel="internal" href="/es/docs/Learn/Common_questions/set_up_a_local_testing_server" title="Spanish">Español (es)</a></bdi></li>
+                
+                  <li><bdi><a rel="internal" href="/fr/docs/Apprendre/Common_questions/configurer_un_serveur_de_test_local" title="French">Français (fr)</a></bdi></li>
+                
+                  <li><bdi><a rel="internal" href="/pt-PT/docs/Learn/Questoes_comuns/Congiurar_um_servidor_de_testes_local" title="Portuguese (Portugal)">Português (Europeu) (pt-PT)</a></bdi></li>
+                
+                  <li><bdi><a rel="internal" href="/ro/docs/Learn/Common_questions/set_up_a_local_testing_server" title="Romanian">Română (ro)</a></bdi></li>
+                
+                  <li><bdi><a rel="internal" href="/zh-CN/docs/Learn/Common_questions/set_up_a_local_testing_server" title="Chinese (Simplified)">中文 (简体) (zh-CN)</a></bdi></li>
+                
+              
+
+              
+                <li><a href="/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server$locales" rel="nofollow" id="translations-add">Add a translation</a></li>
+              
+            </ul>
+          </div>
+        </div>
+      </li>
+      
+      <li class="page-buttons-edit"><a href="/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server$edit" class="button neutral" id="edit-button" rel="nofollow">Edit<i aria-hidden="true" class="icon-pencil"></i></a></li>
+      
+
+        
+
+        <li class="page-buttons-advanced"><button id="advanced-menu" class="only-icon" aria-haspopup="true" aria-owns="advanced-menu-submenu" aria-expanded="false"><span>Advanced</span><i aria-hidden="true" class="icon-cog"></i></button>
+        <div class="submenu js-submenu" id="advanced-menu-submenu">
+          <!-- this page -->
+          <div class="submenu-column">
+            <div class="title">Advanced</div>
+            <ul>
+                <li><a href="/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server$history" rel="nofollow">History</a></li>
+                
+                
+                
+
+
+                
+
+                
+                
+                
+                <li class="page-print"><a href="#" onclick="return window.print();">Print this article</a></li>
+            </ul>
+          </div>
+        </div>
+  </li></ul>
+      </div>
+
+      <div class="document-title">
+        
+          <!-- zone image, link to zone root -->
+          <a class="zone-parent" href="/en-US/docs/Learn">Learn web development</a>
+        
+
+        <h1>How do you set up a local testing server?</h1>
+      </div>
+    </div>
+  </div>
+  
+  <div id="toc" class="toc">
+    <div class="center">
+      <div class="toc-head">Jump to:</div>
+        <ol class="toc-links">
+          <li><a href="#Local_files_vs._remote_files" rel="internal">Local files vs. remote files</a><li><a href="#The_problem_with_testing_local_files" rel="internal">The problem with testing local files</a><li><a href="#Running_a_simple_local_HTTP_server" rel="internal">Running a simple local HTTP server</a><li><a href="#Running_server-side_languages_locally" rel="internal">Running server-side languages locally</a>
+        </ol>
+    </div>
+  </div>
+  
+
+      <div class="center clear">
+      
+
+    <div class="wiki-main-content" ><div class="center">
+      <!-- start the main content container -->
+        <div id="wiki-column-container" class="wiki-left-closed wiki-left-none">
+
+          <!-- content row with three strips -->
+          <div class="column-container column-container-reverse">
+
+            <!-- center: main article content -->
+            <div id="wiki-content" class="column-all wiki-column text-content">
+
+              
+
+              
+              
+
+              
+
+              
+                
+              
+              
+
+              <!-- just the article content -->
+              <article id="wikiArticle">
+                
+                  
+                    <div class="summary">
+<p>This article explains how to set up a simple local testing server on your machine, and the basics of how to use it.</p>
+</div>
+
+<table class="learn-box standard-table">
+ <tbody>
+  <tr>
+   <th scope="row">Prerequisites:</th>
+   <td>You need to first know <a href="/en-US/docs/Learn/How_the_Internet_works">how the Internet works</a>, and <a href="/en-US/docs/Learn/What_is_a_Web_server">what a Web server is</a>.</td>
+  </tr>
+  <tr>
+   <th scope="row">Objective:</th>
+   <td>You will learn how to set up a local testing server.</td>
+  </tr>
+ </tbody>
+</table>
+
+<h2 id="Local_files_vs._remote_files">Local files vs. remote files</h2>
+
+<p>Throughout most of the learning area, we tell you to just open your examples directly in a browser — this can be done by double clicking the HTML file, dragging and dropping it into the browser window, or choosing <em>File</em> &gt; <em>Open...</em> and navigating to the HTML file. There are many ways to achieve this.</p>
+
+<p>If the web address path starts with <code>file://</code> followed by the path to the file on your local hard drive, a local file is being used. In contrast, if you view one of our examples hosted on GitHub (or an example on some other remote server), the web address will start with <code>http://</code> or <code>https://</code>, to show that the file has been received via HTTP.</p>
+
+<h2 id="The_problem_with_testing_local_files">The problem with testing local files</h2>
+
+<p>Some examples won't run if you open them as local files. This can be due to a variety of reasons, the most likely being:</p>
+
+<ul>
+ <li><strong>They feature asynchronous requests</strong>. Some browsers (including Chrome) will not run async requests (see <a href="/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Fetching_data">Fetching data from the server</a>) if you just run the example from a local file. This is because of security restrictions (for more on web security, read <a href="/en-US/docs/Learn/Server-side/First_steps/Website_security">Website security</a>).</li>
+ <li><strong>They feature a server-side language</strong>. Server-side languages (such as PHP or Python) require a special server to interpret the code and deliver the results.</li>
+</ul>
+
+<h2 id="Running_a_simple_local_HTTP_server">Running a simple local HTTP server</h2>
+
+<p>To get around the problem of async requests, we need to test such examples by running them through a local web server. One of the easiest ways to do this for our purposes is to use Python's <code>SimpleHTTPServer</code> module.</p>
+
+<p>To do this:</p>
+
+<ol>
+ <li>
+  <p>Install Python. If you are using Linux or Mac OS X, it should be available on your system already. If you are a Windows user, you can get an installer from the Python homepage and follow the instructions to install it:</p>
+
+  <ul>
+   <li>Go to <a href="https://www.python.org/" class="external" rel="noopener">python.org</a></li>
+   <li>Under the Download section, click the link for Python "3.xxx".</li>
+   <li>At the bottom of the page, choose the <em>Windows x86 executable installer</em> and download it.</li>
+   <li>When it has downloaded, run it.</li>
+   <li>On the first installer page, make sure you check the "Add Python 3.xxx to PATH" checkbox.</li>
+   <li>Click <em>Install</em>, then click <em>Close</em> when the installation has finished.</li>
+  </ul>
+ </li>
+ <li>
+  <p>Open your command prompt (Windows)/terminal (OS X/Linux). To check Python is installed, enter the following command:</p>
+
+  <pre class="brush: bash">python -V</pre>
+ </li>
+ <li>
+  <p>This should return a version number. If this is OK, navigate to the directory that your example is inside, using the <code>cd</code> command.</p>
+
+  <pre class="brush: bash"># include the directory name to enter it, for example
+cd Desktop
+# use two dots to jump up one directory level if you need to
+cd ..</pre>
+ </li>
+ <li>
+  <p>Enter the command to start up the server in that directory:</p>
+
+  <pre class="brush: bash"># If Python version returned above is 3.X
+python -m http.server
+# If Python version returned above is 2.X
+python -m <code>SimpleHTTPServer</code></pre>
+ </li>
+ <li>
+  <p>By default, this will run the contents of the directory on a local web server, on port 8000. You can go to this server by going to the URL <code>localhost:8000</code> in your web browser. Here you'll see the contents of the directory listed — click the HTML file you want to run.</p>
+ </li>
+</ol>
+
+<div class="note">
+<p><strong>Note</strong>: If you already have something running on port 8000, you can choose another port by running the server command followed by an alternative port number, e.g. <code>python -m http.server 7800</code> (Python 3.x) or <code>python -m SimpleHTTPServer 7800</code> (Python 2.x). You can then access your content at <code>localhost:7800</code>.</p>
+</div>
+
+<h2 id="Running_server-side_languages_locally">Running server-side languages locally</h2>
+
+<p>Python's <code>SimpleHTTPServer</code> module is useful, but it doesn't know how to run code written in languages such as PHP or Python. To handle that you'll need something more — exactly what you'll need depends on the server-side language you are trying to run. Here are a few examples:</p>
+
+<ul>
+ <li>To run Python server-side code, you'll need to use a Python web framework. You can find out how to use the Django framework by reading <a href="/en-US/docs/Learn/Server-side/Django">Django Web Framework (Python)</a>. <a href="http://flask.pocoo.org/" class="external" rel="noopener">Flask</a> is also a good (slightly less heavyweight) alternative to Django. To run this you'll need to <a href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/development_environment#Installing_Python_3">install Python/PIP</a>, then install Flask using <code>pip3 install flask</code>. At this point you should be able to run the Python Flask examples using for example <code>python3 python-example.py</code>, then navigating to <code>localhost:5000</code> in your browser.</li>
+ <li>To run Node.js (JavaScript) server-side code, you'll need to use raw node or a framework built on top of it. Express is a good choice — see <a href="/en-US/docs/Learn/Server-side/Express_Nodejs">Express Web Framework (Node.js/JavaScript)</a>.</li>
+ <li>To run PHP server-side code, you'll need a server setup that can interpret PHP. Good options for local PHP testing are <a href="https://www.mamp.info/en/downloads/" class="external external-icon" rel="noopener">MAMP</a> (Mac and Windows) , <a href="http://ampps.com/download" class="external external-icon" rel="noopener">AMPPS</a> (Mac, Windows, Linux) and <a href="https://www.linux.com/learn/easy-lamp-server-installation" class="external" rel="noopener">LAMP</a> (Linux, Apache, MySQL, and PHP/Python/Perl). These are complete packages that create local setups to allow you to run the Apache server, PHP, and MySQL databases.</li>
+</ul>
+                  
+                
+              </article>
+
+              <!-- contributors -->
+              <div class="wiki-block contributors">
+                <h2 class="offscreen">Document Tags and Contributors</h2>
+                
+                
+  <div class="tag-attach-list contributors-sub">
+    <i aria-hidden="true" class="icon-tags icon-fw"></i>
+    <strong>Tags:</strong>&nbsp;
+    <ul class="tags tags-small">
+      
+        <li><a href="/en-US/docs/tag/Beginner" rel="nofollow">Beginner</a></li>
+      
+        <li><a href="/en-US/docs/tag/django" rel="nofollow">django</a></li>
+      
+        <li><a href="/en-US/docs/tag/Express" rel="nofollow">Express</a></li>
+      
+        <li><a href="/en-US/docs/tag/Flask" rel="nofollow">Flask</a></li>
+      
+        <li><a href="/en-US/docs/tag/lamp" rel="nofollow">lamp</a></li>
+      
+        <li><a href="/en-US/docs/tag/Learn" rel="nofollow">Learn</a></li>
+      
+        <li><a href="/en-US/docs/tag/Node" rel="nofollow">Node</a></li>
+      
+        <li><a href="/en-US/docs/tag/PHP" rel="nofollow">PHP</a></li>
+      
+        <li><a href="/en-US/docs/tag/Python" rel="nofollow">Python</a></li>
+      
+        <li><a href="/en-US/docs/tag/server-side" rel="nofollow">server-side</a></li>
+      
+        <li><a href="/en-US/docs/tag/servers" rel="nofollow">servers</a></li>
+      
+    </ul>
+  </div>
+
+
+                
+                  <div class="contributors-sub">
+                    <i aria-hidden="true" class="icon-group icon-fw"></i>&nbsp;<strong>Contributors to this page:</strong> 
+        <a href="/en-US/profiles/suterj">suterj</a>, 
+    
+        <a href="/en-US/profiles/jaikathuria">jaikathuria</a>, 
+    
+        <a href="/en-US/profiles/jgathogo">jgathogo</a>, 
+    
+        <a href="/en-US/profiles/Mateen">Mateen</a>, 
+    
+        <a href="/en-US/profiles/chrisdavidmills">chrisdavidmills</a>
+    
+                  </div>
+                
+
+                
+                  <div class="contributors-sub">
+                    <i aria-hidden="true" class="icon-clock-o icon-fw"></i>&nbsp;<strong>Last updated by:</strong>
+                    <a href="/en-US/profiles/suterj">suterj</a>,
+                    <time datetime="2017-11-30T02:19:21.545665-08:00">Nov 30, 2017, 2:19:21 AM</time>
+                  </div>
+                
+              </div>
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div> <!-- ends "main-content" -->
+
+    
+      <div class="newsletter-box">
+        <div class="newsletter">
+    <form id="newsletterForm" class="newsletter-form nodisable" name="newsletter-form" action="https://www.mozilla.org/en-US/newsletter/" method="post">
+        <div class="newsletter-head">
+            <h2 class="newsletter-teaser">Learn the best of web development</h2>
+            <p class="newsletter-description">Get the latest and greatest from MDN delivered straight to your inbox.</p>
+            
+        </div>
+
+        <div class="newsletter-fields">
+            <input type="hidden" id="fmt" name="fmt" value="H">
+            <input type="hidden" id="newsletterNewslettersInput" name="newsletters" value="app-dev" />
+            <div id="newsletterErrors" class="newsletter-errors"></div>
+
+            <div id="newsletterEmail" class="form-group newsletter-group-email">
+                <label for="newsletterEmailInput" class="form-label offscreen">E-mail</label>
+                <input type="email" id="newsletterEmailInput" name="email" class="form-input newsletter-input-email" required placeholder="you@example.com" size="30">
+            </div>
+
+            <div id="newsletterPrivacy" class="form-group form-group-agree newsletter-group-privacy hidden">
+                <input type="checkbox" id="newsletterPrivacyInput" name="privacy" required>
+                <label for="newsletterPrivacyInput">
+                I'm okay with Mozilla handling my info as explained in this <a href="https://www.mozilla.org/privacy/">Privacy Policy</a>.
+                </label>
+            </div>
+            <div id="newsletterSubmit" class="newsletter-group-submit">
+                <button id="newsletter-submit" type="submit" class="button neutral newsletter-submit">Sign up now</button>
+            </div>
+        </div>
+    </form>
+    <div id="newsletterThanks" class="newsletter-thanks hidden">
+        <h2>Thanks! Please check your inbox to confirm your subscription.</h2>
+        <p>If you haven’t previously confirmed a subscription to a Mozilla-related newsletter you may have to do so. Please check your inbox or your spam filter for an email from us.
+        </p>
+    </div>
+    <button id="newsletterHide" type="button" class="only-icon newsletter-hide hidden"><span>Hide Newsletter Sign-up</span><i aria-hidden="true" class="icon-times"></i></button>
+</div>
+      </div>
+    
+
+  <menu type="context" id="edit-history-menu">
+    <menuitem data-action="/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server$edit" label="Edit page"></menuitem>
+    <menuitem data-action="/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server$history" label="View page history"></menuitem>
+  </menu>
+
+      </div>
+  </main>
+  <!-- Footer -->
+    <footer id="nav-footer" class="nav-footer">
+      <div class="center">
+          <a href="/en-US/" class="nav-footer-logo">MDN Web Docs</a>
+          <div class="footer-group footer-group-mdn">
+            <h2 class="footer-title">MDN</h2>
+            <ul class="footer-list">
+              <li><a href="/en-US/docs/Web">Web Technologies</a></li>
+              <li><a href="/en-US/docs/Learn">Learn Web Development</a></li>
+              <li><a href="/docs/MDN/About">About MDN</a></li>
+              <li><a href="/en-US/docs/MDN/Feedback">Feedback</a></li>
+              <li class="footer-social"><a href="https://twitter.com/mozdevnet" class="only-icon"><i aria-hidden="true" class="icon-twitter"></i> <span>Twitter</span></a></li>
+              <li class="footer-social"><a href="https://github.com/mdn/" class="only-icon"><i aria-hidden="true" class="icon-github"></i> <span>GitHub</span></a></li>
+            </ul>
+          </div>
+
+          <a href="https://mozilla.org" class="nav-footer-mozilla">Mozilla</a>
+          <div class="footer-group footer-group-mozilla">
+            <h2 class="footer-title">Mozilla</h2>
+            <ul class="footer-list">
+              <li><a href="https://www.mozilla.org/about/">About</a></li>
+              <li><a href="https://www.mozilla.org/contact/">Contact Us</a></li>
+              <li><a href="https://donate.mozilla.org/?utm_source=developer.mozilla.org&utm_medium=referral&utm_content=footer">Donate</a></li>
+              <li><a href="https://www.mozilla.org/firefox/?utm_source=developer.mozilla.org&utm_campaign=footer&utm_medium=referral">Firefox</a></li>
+              <li class="footer-social"><a href="https://twitter.com/mozilla" class="only-icon"><i aria-hidden="true" class="icon-twitter"></i> <span>Twitter</span></a></li>
+              <li class="footer-social"><a href="https://www.facebook.com/mozilla" class="only-icon"><i aria-hidden="true" class="icon-facebook"></i> <span>Facebook</span></a></li>
+              <li class="footer-social"><a href="https://www.instagram.com/mozillagram/" class="only-icon"><i aria-hidden="true" class="icon-instagram"></i> <span>Instagram</span></a></li>
+            </ul>
+          </div>
+
+          
+  
+    <form class="languages go" method="get" action="/en-US/docs/Web">
+      <label for="language">Other languages:</label>
+      <select id="language" class="wiki-l10n" name="next" dir="ltr">
+        <option title="English (US)" value="/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server" selected>
+          English (US) (en-US)
+        </option>
+        
+          <option title="Spanish" value="/es/docs/Learn/Common_questions/set_up_a_local_testing_server">
+            Español (es)
+          </option>
+          <option title="French" value="/fr/docs/Apprendre/Common_questions/configurer_un_serveur_de_test_local">
+            Français (fr)
+          </option>
+          <option title="Portuguese (Portugal)" value="/pt-PT/docs/Learn/Questoes_comuns/Congiurar_um_servidor_de_testes_local">
+            Português (Europeu) (pt-PT)
+          </option>
+          <option title="Romanian" value="/ro/docs/Learn/Common_questions/set_up_a_local_testing_server">
+            Română (ro)
+          </option>
+          <option title="Chinese (Simplified)" value="/zh-CN/docs/Learn/Common_questions/set_up_a_local_testing_server">
+            中文 (简体) (zh-CN)
+          </option>
+      </select>
+      <noscript><button type="submit">Go</button></noscript>
+    </form>
+  
+
+
+          
+            <ul class="footer-tos">
+              <li><a href="https://www.mozilla.org/about/legal/terms/mozilla">Terms</a></li>
+              <li><a href="https://www.mozilla.org/privacy/websites/">Privacy</a></li>
+              <li><a href="https://www.mozilla.org/privacy/websites/#cookies">Cookies</a></li>
+            </ul>
+
+            <div id="license" class="contentinfo">
+              <p>&copy; 2005-2018 Mozilla and individual contributors.</p> <p>Content is available under <a href="/en-US/docs/MDN/About#Copyrights_and_licenses">these licenses</a>.</p>
+            </div>
+          
+      </div>
+    </footer> 
+
+  <!-- site js -->
+  
+    
+    <!--[if lte IE 8]><script type="text/javascript" src="https://cdn.mdn.mozilla.net/static/build/js/selectivizr.091e18cf669b.js" charset="utf-8"></script><![endif]-->
+
+    
+    <script type="text/javascript" src="https://cdn.mdn.mozilla.net/static/jsi18n/en-us/javascript.b28203373cc1.js"></script>
+    <script type="text/javascript" src="https://cdn.mdn.mozilla.net/static/build/js/main.1a9ef20ed7e1.js" charset="utf-8"></script>
+    <script>
+      if(window.mdn && mdn.analytics) mdn.analytics.trackOutboundLinks();
+    </script>
+    
+
+  
+
+    <script async type="text/javascript" src="https://cdn.mdn.mozilla.net/static/build/js/wiki.c60705233ffd.js" charset="utf-8"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+    <script async type="text/javascript" src="https://cdn.mdn.mozilla.net/static/build/js/newsletter.7cd3274169f2.js" charset="utf-8"></script>
+  
+
+
+</body>
+</html>
